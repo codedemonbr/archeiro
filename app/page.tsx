@@ -36,7 +36,7 @@ export default function Home() {
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder="seu@email.com"
                     required
                   />
                 </div>
