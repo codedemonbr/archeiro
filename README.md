@@ -1,154 +1,110 @@
-<p align="center">
-  <img src="https://via.placeholder.com/1200x400/1e293b/94a3b8?text=Archeiro+-+Gestor+de+Projetos+Arquitetônicos" alt="Archeiro Banner" width="100%"/>
-  <br/><br/>
-  <a href="https://github.com/codedemonbr/archeiro/stargazers"><img src="https://img.shields.io/github/stars/codedemonbr/archeiro?style=for-the-badge&color=yellow" alt="Stars"/></a>
-  <a href="https://github.com/codedemonbr/archeiro/forks"><img src="https://img.shields.io/github/forks/codedemonbr/archeiro?style=for-the-badge&color=teal" alt="Forks"/></a>
-  <a href="https://github.com/codedemonbr/archeiro/issues"><img src="https://img.shields.io/github/issues/codedemonbr/archeiro?style=for-the-badge&color=orange" alt="Issues"/></a>
-  <a href="https://github.com/codedemonbr/archeiro/blob/main/LICENSE"><img src="https://img.shields.io/github/license/codedemonbr/archeiro?style=for-the-badge&color=purple" alt="License"/></a>
-  <br/>
-  <img src="https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js"/>
-  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white" alt="Spring Boot"/>
-  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java"/>
-  <img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" alt="Kubernetes"/>
-</p>
 
-<h1 align="center">🏹 Archeiro</h1>
-<h3 align="center">O gestor de arquivos definitivo para arquitetos e escritórios de arquitetura</h3>
+# Archeiro — Cada Traço Arquitetura
 
-<p align="center">
-  <b>Organize • Visualize • Compartilhe</b> projetos de arquitetura com velocidade, segurança e beleza.<br/>
-  Feito por arquitetos, para arquitetos.
-</p>
+[![Deployed on Vercel](https://img.shields.io/badge/Deploy%20on-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)](https://archeiro.vercel.app)
+[![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind%20CSS-4-black?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-<p align="center">
-  <a href="#-comece-hoje">Comece agora</a> •
-  <a href="#-principais-diferenciais">Diferenciais</a> •
-  <a href="#-stack-tecnológica">Tecnologias</a> •
-  <a href="#-implantação">Deploy</a> •
-  <a href="#-contribua">Contribua</a>
-</p>
+**Sistema moderno de gerenciamento de projetos de arquitetura.**
+
+> "Seja bem-vindo ao nosso sistema de arquitetura!"
 
 ---
 
-## ✨ Por que o Archeiro está mudando o jogo?
+## ✨ Sobre o Projeto
 
-Arquitetos gastam horas preciosas procurando arquivos, enviando pastas pesadas por e-mail e perdendo versões antigas de projetos.  
+O **Archeiro** é o sistema web da **Cada Traço Arquitetura**, desenvolvido para facilitar o controle de projetos, clientes, cronogramas e entregas.  
+Foi construído do zero com as tecnologias mais recentes do ecossistema React/Next.js para oferecer performance, beleza e experiência de desenvolvedor excepcional.
 
-**Archeiro resolve isso de forma elegante e profissional:**
-
-
-- Busca instantânea + filtros por projeto, data, tipo, cliente, tags
-- Feito para escalar: do escritório pequeno ao grande studio
-
-> “Finalmente uma ferramenta que entende o fluxo real de um escritório de arquitetura.”  
-> — (futuro depoimento de usuário 😄)
+**Link ao vivo:** [https://archeiro.vercel.app](https://archeiro.vercel.app)
 
 ---
 
-## 🚀 Comece hoje (em menos de 5 minutos)
+## 🚀 Funcionalidades Atuais
 
-### Pré-requisitos
+- Landing page moderna e responsiva
+- Suporte completo a temas claro/escuro (system preference)
+- Design system baseado em **shadcn/ui** + **Radix UI**
+- Tipografia otimizada com **Geist** (fonte da Vercel)
+- Animações suaves com `tw-animate-css`
+- Totalmente configurado com TypeScript e ESLint
 
-- Node.js 18+  
-- Java 17+  
-- Docker + Docker Compose (recomendado para dev)  
-- Opcional: Minikube / cluster Kubernetes
+---
 
-### Desenvolvimento local (recomendado)
+## 🛠️ Stack Tecnológica
+
+| Tecnologia              | Versão     | Propósito                          |
+|-------------------------|------------|------------------------------------|
+| **Next.js**             | 16.1.6     | Framework (App Router + React 19) |
+| **React**               | 19.2.3     | Biblioteca principal               |
+| **Tailwind CSS**        | 4          | Estilização (nova sintaxe)         |
+| **shadcn/ui**           | —          | Componentes acessíveis e bonitos   |
+| **next-themes**         | ^0.4.6     | Temas claro/escuro                 |
+| **Lucide React**        | ^0.577.0   | Ícones                             |
+| **TypeScript**          | ^5         | Tipagem                            |
+| **pnpm**                | —          | Gerenciador de pacotes             |
+
+---
+
+## 📦 Como rodar localmente
 
 ```bash
-# 1. Clone o projeto
+# 1. Clone o repositório
 git clone https://github.com/codedemonbr/archeiro.git
 cd archeiro
 
-# 2. Suba os serviços auxiliares (PostgreSQL, RabbitMQ, etc)
-docker compose up -d
+# 2. Instale as dependências
+pnpm install
 
-# 3. Backend
-cd backend
-./mvnw clean install
-./mvnw spring-boot:run
-
-# 4. Frontend (em outro terminal)
-cd ../frontend
-npm install
-npm run dev
+# 3. Rode o servidor de desenvolvimento
+pnpm dev
 ```
 
----
-
-## 🛠️ Stack Tecnológica (escolha moderna e robusta)
-
-**Frontend**  
-Next.js 14+ • TypeScript • Tailwind CSS • React Server Components
-
-**Backend**  
-Java 21 • Spring Boot 3 • Spring Security • Arquitetura Hexagonal  
-PostgreSQL • RabbitMQ (filas assíncronas) • MinIO/S3 (armazenamento)
-
-**DevOps & Qualidade**  
-Docker • Kubernetes manifests prontos • JUnit 5 + Mockito  
-GitHub Actions (CI/CD sugerido)
+Acesse: **http://localhost:3000**
 
 ---
 
-## ☸️ Deploy em Produção (Kubernetes)
+## 🚀 Deploy
 
-Já incluímos manifests testados em `k8s/`
-
-```bash
-# Ajuste os secrets e configmaps
-kubectl apply -k k8s/overlays/production/
-```
-
-Ou use Helm Chart (futuro)
+O projeto está configurado para deploy automático na **Vercel**.  
+Qualquer push na branch `main` já atualiza o ambiente de produção.
 
 ---
 
-## 🧪 Testes e Qualidade
+## 📌 Roadmap (próximos passos)
 
-```bash
-# Backend
-cd backend
-./mvnw test
+- [ ] Tela completa de Login/Sign Up (com `react-hook-form` + Zod)
+- [ ] Dashboard protegido
+- [ ] Gerenciamento de projetos (tabela, cards, filtros)
+- [ ] Integração com banco (Prisma + Supabase ou PostgreSQL)
+- [ ] Upload de plantas e imagens
+- [ ] Relatórios e exportação PDF
+- [ ] Responsividade total + PWA
 
-# Frontend (em desenvolvimento)
-cd frontend
-npm run test    # ou npm run lint
-```
+Quer ajudar? Veja a seção **Contribuindo** abaixo!
 
 ---
 
-## 🤝 Como contribuir
+## 🤝 Contribuindo
 
-Adoraríamos sua ajuda! Algumas ideias:
+1. Faça um fork do projeto
+2. Crie uma branch (`git checkout -b feature/nova-funcionalidade`)
+3. Commit suas alterações (`git commit -m 'feat: adiciona nova tela'`)
+4. Push (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
 
-- Melhorar visualização de arquivos (suporte a mais formatos)
-- Recursos de markup/colaboração em planta
-- Integração com BIM tools
-- Tradução (inglês, espanhol…)
-- Temas dark/light mais bonitos
-
-1. Abra uma **issue** descrevendo sua ideia  
-2. Fork → branch → pull request  
-3. Siga nosso [Código de Conduta](CODE_OF_CONDUCT.md) e [Guia de Contribuição](CONTRIBUTING.md)
+Qualquer dúvida, abra uma **Issue**!
 
 ---
 
 ## 📄 Licença
 
-MIT License — sinta-se livre para usar, modificar e comercializar.
+Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-Criado com 💙 por **[Thiago Henrique](https://github.com/SEU_USUARIO)** — BraSil com S
+---
 
-📬 **Dúvidas? Sugestões?** Abra uma issue ou me chama no LinkedIn/X!
+**Feito com ❤️ por Thiago Henrique (codedemonbr)**
 
-⭐ Se você gostou do projeto, não esquece de dar uma estrela — ajuda muito!
+Se você é arquiteto, designer ou dev e quer acompanhar o desenvolvimento, é só dar uma ⭐ no repositório!
 
-<p align="center">
-  <img src="https://via.placeholder.com/800x200/0f172a/64748b?text=Feito+para+arquitetos+que+amamos+o+que+fazemos" alt="Footer" width="80%"/>
-</p>
-
-
-
-
+---
