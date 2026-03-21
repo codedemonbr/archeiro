@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { RegistrationForm } from "@/types/auth";
-import type { UseFormReturn } from "react-hook-form";
+import { InputMask } from "@react-input/mask";
+import { Controller, type UseFormReturn } from "react-hook-form";
 
 interface RegistrationFormProps {
   form: UseFormReturn<RegistrationForm>;
@@ -18,51 +19,70 @@ export function RegistrationForm({
   isSubmitting,
 }: RegistrationFormProps) {
   const {
-    register,
+    control,
     formState: { errors },
   } = form;
 
   return (
     <form onSubmit={onSubmit} className="space-y-6">
+      {/* Nome (sem máscara) */}
       <div className="grid gap-2">
         <Label htmlFor="nome">Nome completo</Label>
-        <Input id="nome" {...register("nome")} placeholder="José da Silva" />
+        <Input
+          id="nome"
+          {...form.register("nome")}
+          placeholder="José da Silva"
+        />
         {errors.nome && (
           <p className="text-red-500 text-sm">{errors.nome.message}</p>
         )}
       </div>
 
+      {/* CPF com máscara */}
       <div className="grid gap-2">
         <Label htmlFor="cpf">CPF</Label>
-        <Input
-          id="cpf"
-          {...register("cpf")}
-          placeholder="00000000000"
-          maxLength={11}
+        <Controller
+          name="cpf"
+          control={control}
+          render={({ field }) => (
+            <InputMask
+              mask="999.999.999-99"
+              value={field.value}
+              onChange={field.onChange}
+            ></InputMask>
+          )}
         />
         {errors.cpf && (
           <p className="text-red-500 text-sm">{errors.cpf.message}</p>
         )}
       </div>
 
+      {/* Telefone com máscara */}
       <div className="grid gap-2">
         <Label htmlFor="telefone">Telefone</Label>
-        <Input
-          id="telefone"
-          {...register("telefone")}
-          placeholder="(11) 98765-4321"
+        <Controller
+          name="telefone"
+          control={control}
+          render={({ field }) => (
+            <InputMask
+              mask="(99) 99999-9999"
+              value={field.value}
+              onChange={field.onChange}
+            ></InputMask>
+          )}
         />
         {errors.telefone && (
           <p className="text-red-500 text-sm">{errors.telefone.message}</p>
         )}
       </div>
 
+      {/* Email e Senha (sem máscara) */}
       <div className="grid gap-2">
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
           type="email"
-          {...register("email")}
+          {...form.register("email")}
           placeholder="seu@email.com"
         />
         {errors.email && (
@@ -75,7 +95,7 @@ export function RegistrationForm({
         <Input
           id="senha"
           type="password"
-          {...register("senha")}
+          {...form.register("senha")}
           placeholder="••••••••"
         />
         {errors.senha && (

@@ -7,6 +7,9 @@ import { toast } from "sonner";
 import * as z from "zod";
 import { authService } from "../services/authService";
 
+// ────────────────────────────────────────────────
+// Schema Zod com .transform (para aceitar valor formatado)
+// ────────────────────────────────────────────────
 const registrationSchema = z.object({
   nome: z
     .string()
@@ -20,31 +23,45 @@ const registrationSchema = z.object({
           .every((p) => p.length >= 2),
       "Digite o nome completo (nome + sobrenome)",
     ),
+
   cpf: z
     .string()
-    .length(11, "CPF deve ter exatamente 11 dígitos")
-    .regex(/^\d{11}$/, "CPF deve conter apenas números")
-    .refine((val) => {
-      // Algoritmo CPF (mantido inline por ser leve e performático)
-      if (/^(\d)\1{10}$/.test(val)) return false;
-      let sum = 0;
-      for (let i = 0; i < 9; i++) sum += parseInt(val[i]) * (10 - i);
-      let rest = (sum * 10) % 11;
-      if (rest === 10 || rest === 11) rest = 0;
-      if (rest !== parseInt(val[9])) return false;
-      sum = 0;
-      for (let i = 0; i < 10; i++) sum += parseInt(val[i]) * (11 - i);
-      rest = (sum * 10) % 11;
-      if (rest === 10 || rest === 11) rest = 0;
-      return rest === parseInt(val[10]);
-    }, "CPF inválido"),
+    .transform((val) => val.replace(/\D/g, "")) // limpa máscara antes da validação
+    .pipe(
+      z
+        .string()
+        .length(11, "CPF deve ter exatamente 11 dígitos")
+        .regex(/^\d{11}$/, "CPF deve conter apenas números")
+        .refine((val) => {
+          if (/^(\d)\1{10}$/.test(val)) return false;
+          // algoritmo CPF oficial (mantido)
+          let sum = 0;
+          for (let i = 0; i < 9; i++) sum += parseInt(val[i]) * (10 - i);
+          let rest = (sum * 10) % 11;
+          if (rest === 10 || rest === 11) rest = 0;
+          if (rest !== parseInt(val[9])) return false;
+
+          sum = 0;
+          for (let i = 0; i < 10; i++) sum += parseInt(val[i]) * (11 - i);
+          rest = (sum * 10) % 11;
+          if (rest === 10 || rest === 11) rest = 0;
+          return rest === parseInt(val[10]);
+        }, "CPF inválido"),
+    ),
+
   telefone: z
     .string()
-    .regex(
-      /^\(?\d{2}\)?\s?9?\d{4}-?\d{4}$/,
-      "Formato inválido. Ex: (11) 98765-4321",
+    .transform((val) => val.replace(/\D/g, "")) // limpa máscara
+    .pipe(
+      z
+        .string()
+        .min(10, "Telefone inválido")
+        .max(11, "Telefone inválido")
+        .regex(/^\d{10,11}$/, "Telefone deve ter 10 ou 11 dígitos"),
     ),
+
   email: z.string().email("Email inválido").toLowerCase(),
+
   senha: z
     .string()
     .min(8, "Senha deve ter no mínimo 8 caracteres")
@@ -71,14 +88,12 @@ export function useRegistration() {
     const toastId = toast.loading("Cadastrando usuário...");
 
     try {
-      await authService.registerUser(data);
+      await authService.registerUser(data); // cpf e telefone já vêm limpos graças ao .transform
       toast.success("Cadastro realizado com sucesso!", { id: toastId });
       form.reset();
     } catch (error: any) {
       const message =
-        error.response?.data?.message ||
-        error.message ||
-        "Erro ao cadastrar. Tente novamente mais tarde.";
+        error.response?.data?.message || error.message || "Erro ao cadastrar.";
       toast.error(message, { id: toastId });
     }
   };

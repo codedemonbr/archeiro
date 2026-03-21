@@ -1,7 +1,5 @@
 import type { RegistrationData } from "@/types/auth";
-import axios from "axios";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
+import { getApiClient } from "../lib/api/apiClient";
 
 export const authService = {
   async registerUser(data: RegistrationData) {
@@ -13,10 +11,14 @@ export const authService = {
       senha: data.senha,
     };
 
-    const response = await axios.post(`${API_URL}/auth/users`, payload, {
-      headers: { "Content-Type": "application/json" },
-    });
+    // Usa a instância com interceptors
+    const api = getApiClient();
+
+    const response = await api.post("/auth/users", payload);
 
     return response.data;
   },
+
+  // Futuro: adicione mais métodos aqui
+  // async login(credentials: LoginData) { ... }
 };
