@@ -1,8 +1,8 @@
+import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider/theme-provider";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -15,8 +15,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Cada Traço Arquitetura | Sistema de Gerenciamento de Projetos",
-  description: "Sistema moderno de arquitetura para controle de projetos, clientes, cronogramas e entregas. Acesse agora em cadatraco.com",
-  keywords: ["arquitetura", "projetos de arquitetura", "gerenciamento de obras", "cada traço arquitetura", "sistema para arquitetos"],
+  description:
+    "Sistema moderno de arquitetura para controle de projetos, clientes, cronogramas e entregas. Acesse agora em cadatraco.com",
+  keywords: [
+    "arquitetura",
+    "projetos de arquitetura",
+    "gerenciamento de obras",
+    "cada traço arquitetura",
+    "sistema para arquitetos",
+  ],
   authors: [{ name: "Cada Traço Arquitetura" }],
   openGraph: {
     title: "Cada Traço Arquitetura",
@@ -40,12 +47,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <Toaster richColors position="top-right" closeButton />
         </ThemeProvider>
       </body>
     </html>
