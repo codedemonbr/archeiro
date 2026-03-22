@@ -4,6 +4,7 @@ export interface RegistrationData {
   telefone: string;
   email: string;
   senha: string;
+  confirmarSenha: string;
 }
 
 export type RegistrationForm = RegistrationData;
