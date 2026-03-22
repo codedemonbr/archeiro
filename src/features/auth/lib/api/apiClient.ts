@@ -3,8 +3,8 @@
 import axios, {
   AxiosError,
   AxiosInstance,
-  AxiosRequestConfig,
   AxiosResponse,
+  InternalAxiosRequestConfig,
 } from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
@@ -23,7 +23,7 @@ const createApiClient = (): AxiosInstance => {
   // Request Interceptor
   // ────────────────────────────────────────────────
   instance.interceptors.request.use(
-    (config: AxiosRequestConfig) => {
+    (config: InternalAxiosRequestConfig) => {
       // Aqui você pode adicionar token de autenticação, locale, etc.
       // Exemplo futuro: token de auth
       // if (typeof window !== 'undefined') {
