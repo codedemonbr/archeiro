@@ -22,6 +22,7 @@ export function InputPassword({
         className="pr-10" // Abre espaço para o ícone não sobrepor o texto
         {...register(name)}
         {...props}
+        placeholder="••••••••"
       />
       <Button
         type="button"
