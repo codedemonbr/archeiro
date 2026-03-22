@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { forwardRef, useCallback } from 'react';
-import { useMask } from '@react-input/mask';
-import { Input, type InputProps } from './input';
+import { Replacement, useMask } from "@react-input/mask";
+import { forwardRef } from "react";
+import { Input, type InputProps } from "./input";
 
 interface MaskedInputProps extends InputProps {
-    mask: string;
-    replacement: RegExp;
+  mask: string;
+  replacement: Replacement;
 }
 
 function mergeRefs<T>(...refs: React.Ref<T>[]) {
   return (node: T) => {
-    refs.forEach(ref => {
-      if (typeof ref === 'function') {
+    refs.forEach((ref) => {
+      if (typeof ref === "function") {
         ref(node);
-      } else if (ref && 'current' in ref) {
+      } else if (ref && "current" in ref) {
         // Now TypeScript knows ref is a RefObject with a writable current property
         ref.current = node;
       }
@@ -23,13 +23,12 @@ function mergeRefs<T>(...refs: React.Ref<T>[]) {
 }
 
 export const MaskedInput = forwardRef<HTMLInputElement, MaskedInputProps>(
-    ({ mask, replacement, ...props }, forwardedRef) => {
-        const maskRef = useMask({ mask, replacement }); // returns { current: null }
-        const mergedRef = mergeRefs(maskRef, forwardedRef);
+  ({ mask, replacement, ...props }, forwardedRef) => {
+    const maskRef = useMask({ mask, replacement }); // returns { current: null }
+    const mergedRef = mergeRefs(maskRef, forwardedRef);
 
-
-        return <Input ref={mergedRef} {...props} />;
-    }
+    return <Input ref={mergedRef} {...props} />;
+  },
 );
 
-MaskedInput.displayName = 'MaskedInput';
+MaskedInput.displayName = "MaskedInput";
