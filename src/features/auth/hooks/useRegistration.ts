@@ -7,6 +7,14 @@ import { toast } from "sonner";
 import * as z from "zod";
 import { authService } from "../services/authService";
 
+// Polyfill para requestSubmit
+if (typeof HTMLFormElement.prototype.requestSubmit !== "function") {
+  HTMLFormElement.prototype.requestSubmit = function () {
+    this.dispatchEvent(
+      new Event("submit", { cancelable: true, bubbles: true }),
+    );
+  };
+}
 // ────────────────────────────────────────────────
 // Schema Zod com .transform (para aceitar valor formatado)
 // ────────────────────────────────────────────────
@@ -81,7 +89,7 @@ const registrationSchema = z
 export function useRegistration() {
   const form = useForm<RegistrationForm>({
     resolver: zodResolver(registrationSchema),
-    mode: "onChange",
+    mode: "all",
     defaultValues: {
       nome: "",
       cpf: "",
